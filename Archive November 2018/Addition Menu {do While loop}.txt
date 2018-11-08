@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+
+        {
+            int answer = 0;
+            Console.WriteLine("*********************");
+            Console.WriteLine("1. Add 5 + 6 ");
+            Console.WriteLine("2. Add 11 + 13");
+            Console.WriteLine("3. Add 3 + 9");
+            Console.WriteLine("4. Exit Menu");
+            Console.WriteLine("*********************");          
+            do
+            {
+                answer = int.Parse(Console.ReadLine());
+                if (answer == 1)
+                {
+                    fiveplussix();
+                }
+
+                if (answer == 2)
+                {
+                    elevenplusthirteen();
+                }
+                if (answer == 3)
+                {
+                    threeplusnine();
+                }               
+            } while (answer != 4);
+        }
+
+
+            static void fiveplussix()
+            {
+            Console.WriteLine("Add 5 + 6 = " + ( 5 + 6));
+            }
+            static void elevenplusthirteen()
+            {
+                Console.WriteLine("Add 11 + 13 = " + (11 + 13));
+            }
+            static void threeplusnine()
+            {
+                Console.WriteLine("Add 3 + 9 = " + (3 + 9));
+            }
+        
+    }
+}

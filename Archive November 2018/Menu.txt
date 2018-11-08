@@ -1,0 +1,55 @@
+using System;
+public class Program 
+{
+	public static void Main(string[] args){
+		int i;
+	do
+	{
+		Console.WriteLine("...............................................................................................................................");
+		Console.WriteLine(".. Enter the integer value for the action you want to preform");
+		Console.WriteLine(".. 1. Draw small square");
+		Console.WriteLine(".. 2. Draw medium square");
+		Console.WriteLine(".. 3. Draw big quare");
+		Console.WriteLine(".. 4. Draw left triangle");
+		Console.WriteLine(".. 5. Draw right triangle");
+		Console.WriteLine(".. 6. Draw triangle");
+		Console.WriteLine(".. 7. Draw double left triagle");
+		Console.WriteLine(".. 8. Draw double left triangle");
+		Console.WriteLine(".. 9. Draw");
+		Console.WriteLine("...............................................................................................................................");
+		
+		
+		i = int.Parse(Console.ReadLine());
+		if (i == 1) 
+		{
+			Console.WriteLine("x");
+		}	
+		else if (i == 2) 
+		{
+			
+		Console.WriteLine(" for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.Write("X");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();");
+			}
+		else if (i == 3) 
+		{
+			
+		Console.WriteLine("3 * 2 = 6");
+			}
+		else if (i == 4) 
+		{
+			
+		Console.WriteLine("Exit the program");
+	}
+
+	}while(i != 4);
+			
+	}	
+}
+	
