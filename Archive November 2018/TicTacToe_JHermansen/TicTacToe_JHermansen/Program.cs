@@ -1,125 +1,108 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TicTacToe_JHermansen
+
 {
     class Program
     {
-        static char[] Box = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        static int player = 1;  
-        static int choice;
-        static int Value = 0;
         static void Main(string[] args)
+        {
+            char[,] array = new char[3, 3];
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    array[i, j] = ' ';
+                }
+            }
+            DrawBoard(array);
+            char result;
+            do
+            {
+                ProccessTurn(array, 'X');
+                result = VerifyBoard(array);
+                Console.Clear();
+                DrawBoard(array);
+                if (result == 'X')
+                    break;
+                ProccessTurn(array, 'O');
+                result = VerifyBoard(array);
+                Console.Clear();
+                DrawBoard(array);
+            } while (result == ' ');
+            if (result == 'O' || result == 'X')
+                Console.WriteLine("\n\n\n" + result + " Has Won!!");
+            if (result == ' ')
+                Console.WriteLine("\n\n\nNo One Wins");
+            Console.ReadLine();
+        }
+        public static void DrawBoard(char[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write("|" + array[i, j] + " ");
+                }
+                Console.WriteLine("|");
+            }
+        }
+        public static char VerifyBoard(char[,] array)
+        {
+            if (array[0, 0] == 'X' && array[0, 1] == 'X' && array[0, 2] == 'X')
+            { return 'X'; }
+            if (array[1, 0] == 'X' && array[1, 1] == 'X' && array[1, 2] == 'X')
+            { return 'X'; }
+            if (array[2, 0] == 'X' && array[2, 1] == 'X' && array[2, 2] == 'X')
+            { return 'X'; }
+            if (array[0, 0] == 'X' && array[1, 0] == 'X' && array[2, 0] == 'X')
+            { return 'X'; }
+            if (array[0, 1] == 'X' && array[1, 1] == 'X' && array[2, 1] == 'X')
+            { return 'X'; }
+            if (array[0, 2] == 'X' && array[1, 2] == 'X' && array[2, 2] == 'X')
+            { return 'X'; }
+            if (array[0, 0] == 'X' && array[1, 1] == 'X' && array[2, 2] == 'X')
+            { return 'X'; }
+            if (array[2, 0] == 'X' && array[1, 1] == 'X' && array[0, 2] == 'X')
+            { return 'X'; }
+            if (array[0, 0] == 'O' && array[0, 1] == 'O' && array[0, 2] == 'O')
+            { return 'O'; }
+            if (array[1, 0] == 'O' && array[1, 1] == 'O' && array[1, 2] == 'O')
+            { return 'O'; }
+            if (array[2, 0] == 'O' && array[2, 1] == 'O' && array[2, 2] == 'O')
+            { return 'O'; }
+            if (array[0, 0] == 'O' && array[1, 0] == 'O' && array[2, 0] == 'O')
+            { return 'O'; }
+            if (array[0, 1] == 'O' && array[1, 1] == 'O' && array[2, 1] == 'O')
+            { return 'O'; }
+            if (array[0, 2] == 'O' && array[1, 2] == 'O' && array[2, 2] == 'O')
+            { return 'O'; }
+            if (array[0, 0] == 'O' && array[1, 1] == 'O' && array[2, 2] == 'O')
+            { return 'O'; }
+            if (array[2, 0] == 'O' && array[1, 1] == 'O' && array[0, 2] == 'O')
+            { return 'O'; }
+            return ' ';
+        }
+        public static void ProccessTurn(char[,] array, char player)
         {
             do
             {
-                Console.Clear();
-                Console.WriteLine("Player 1: X and Player 2: O");
-                Console.WriteLine("\n");
-                if (player % 2 == 0)
-                {
-                    Console.WriteLine("Player 2's Turn");
-                }
-                else
-                {
-                    Console.WriteLine("Player 1's Turn");
-                }
-                Console.WriteLine("\n");
-                Board();
-                choice = int.Parse(Console.ReadLine());     
-                if (Box[choice] != 'X' && Box[choice] != 'O')
-                {
-                    if (player % 2 == 0) 
-                    {
-                        Box[choice] = 'O';
-                        player++;
-                    }
-                    else
-                    {
-                        Box[choice] = 'X';
-                        player++;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Sorry box {0} is already marked with {1}", choice, Box[choice]);
-                }
-                Value = CheckWin();
-            } while (Value != 1 && Value != -1);
+                Console.WriteLine(player + " it is your turn, choose a coordinate : ");
+                Console.Write("X Coordinate: ");
+                int x = int.Parse(Console.ReadLine());
+                Console.Write("Y Coordinate: ");
+                int y = int.Parse(Console.ReadLine());
 
-            Console.Clear();
-            Board(); 
-            if (Value == 1)
-            {
-                Console.WriteLine("Player {0} has won", (player % 2) + 1);
-            }
-            else
-            {
-                Console.WriteLine("Draw");
-            }
-            Console.ReadLine();
-        }  
-        private static void Board()
-        {
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Box[1], Box[2], Box[3]);
-            Console.WriteLine("_____|_____|_____ ");
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Box[4], Box[5], Box[6]);
-            Console.WriteLine("_____|_____|_____ ");
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine("  {0}  |  {1}  |  {2}", Box[7], Box[8], Box[9]);
-            Console.WriteLine("     |     |      ");
-        }
-        private static int CheckWin()
-        {
-            #region Horzontal Winning Condtion 
-            if (Box[1] == Box[2] && Box[2] == Box[3])
-            {
-                return 1;
-            }
-            else if (Box[4] == Box[5] && Box[5] == Box[6])
-            {
-                return 1;
-            }
-            else if (Box[6] == Box[7] && Box[7] == Box[8])
-            {
-                return 1;
-            }
-            #endregion
-            #region vertical Winning Condtion     
-            else if (Box[1] == Box[4] && Box[4] == Box[7])
-            {
-                return 1;
-            }
-            else if (Box[2] == Box[5] && Box[5] == Box[8])
-            {
-                return 1;
-            }
-            else if (Box[3] == Box[6] && Box[6] == Box[9])
-            {
-                return 1;
-            }
-            #endregion
-            #region Diagonal Winning Condition
-            else if (Box[1] == Box[5] && Box[5] == Box[9])
-            {
-                return 1;
-            }
-            else if (Box[3] == Box[5] && Box[5] == Box[7])
-            {
-                return 1;
-            }
-            #endregion
-            #region Checking For Draw
-            else if (Box[1] != '1' && Box[2] != '2' && Box[3] != '3' && Box[4] != '4' && Box[5] != '5' && Box[6] != '6' && Box[7] != '7' && Box[8] != '8' && Box[9] != '9')
-            {
-                return -1;
-            }
-            #endregion
-            else
-            {
-                return 0;
-            }
+                if (array[x, y] == ' ')
+                {
+                    array[x, y] = player;
+                    break;
+                }
+            } while (true);
         }
     }
 }
